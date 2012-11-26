@@ -22,6 +22,8 @@ VPATH = src
 
 SOURCE = main.cpp
 SOURCE += vectest.cpp
+SOURCE += rtrace.cpp
+SOURCE += partsys.cpp
 
 DEFINES = 
 
