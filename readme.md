@@ -1,5 +1,6 @@
 Some simple benchmarks comparing the Clang vector extension, SSE intrinsics, and a plain vector class for single-precision float vectors.
 
+# Summary
 The extension and intrinsics tests use 4 component vectors for better mapping to 128-bit SSE registers (loading/storing 4 floats requires one instruction, 3 requires two separate loads and some shuffling).
 
 The structs, and arrays where implemented, have 3D and 4D versions selected by a preprocessor define. The 4D version more accurately represents the relative capabilities in general computation, the 3D version is more representative for 3D geometry, physics, and graphics.
@@ -31,8 +32,35 @@ Intrinsics:
 * Processor-specific.
 * Ugly code.
 
+# Timings:
 
-Some notes:
+On my dual quad-core Mac Pro, clang version 3.2 (trunk 167613):
+
+	Math tests
+
+	Struct: 0.734957 s
+	Array: 0.734050 s
+	Extension: 0.479301 s
+	Intrinsics: 0.480404 s
+
+
+	Ray tracing tests
+
+	Structs: 0.989610 s
+	Extension: 0.756928 s
+	Intrinsics: 0.677218 s
+	Rays: 0.846294 s
+	Ray+obj: 0.802400 s
+
+
+	Particle system tests
+
+	Structs: 0.865972 s
+	extension: 0.570777 s
+	intrinsics: 0.570669 s
+
+
+# Notes:
 SSE4.1 is supported by Harpertown (2008 MacPro3,1) and Q6600. It seems a reasonable minimum requirement for modern high-performance code.
 
 http://sseplus.sourceforge.net/fntable.html
